@@ -115,6 +115,12 @@ void SensorDevice::initializeSensorList() {
                 // Don't crash here or the device will go into a crashloop.
                 ALOGW("%s should have a non-zero resolution", sensor.name);
             }
+
+            // DIM
+            if (strstr(sensor.name, "APDS-9910 Proximity")) {
+                sensor.maxRange = 4;
+                ALOGW("-DIM- %s's max range set to %.12f", sensor.name, sensor.maxRange);
+            }
         }
 
         // Check and clamp power if it is 0 (or close)
